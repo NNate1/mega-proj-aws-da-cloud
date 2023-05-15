@@ -1,0 +1,56 @@
+#JQ Cenas
+*.id
+*.DNS
+
+#KEYS
+*.pem
+
+#Config
+config.sh
+
+# Compiled files
+*.class
+
+# Log files
+*.log
+
+# Dependencies
+node_modules/
+bower_components/
+jspm_packages/
+
+# Build output
+dist/
+build/
+out/
+
+# IDE specific files
+.vscode/
+.idea/
+
+# macOS specific files
+.DS_Store
+
+# Swap files (Vim)
+*.swp
+
+# Vim backup files
+*.bak
+*~
+
+# Vim undo files
+*.un~
+
+# Temporary files (Vim)
+.netrwhist
+*.tmp
+
+# Fugitive plugin temporary files (Vim)
+.fugitive/
+
+# Vim undo directory
+.undo/
+
+# Vim backup directory
+.backup/
+
