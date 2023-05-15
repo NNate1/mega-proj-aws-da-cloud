@@ -1,6 +1,6 @@
 #JQ Cenas
 *.id
-*.DNS
+*.dns
 
 #KEYS
 *.pem
