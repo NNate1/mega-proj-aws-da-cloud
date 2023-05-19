@@ -16,6 +16,7 @@
 		<module>compression</module>
 		<module>foxes-rabbits</module>
 		<module>insect-war</module>
+		<module>javassist</module>
 		<module>webserver</module>
 	</modules>
 
