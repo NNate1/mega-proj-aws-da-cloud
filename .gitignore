@@ -2,6 +2,8 @@
 *.id
 *.dns
 
+
+
 #KEYS
 *.pem
 
@@ -23,6 +25,7 @@ jspm_packages/
 dist/
 build/
 out/
+target/
 
 # IDE specific files
 .vscode/
