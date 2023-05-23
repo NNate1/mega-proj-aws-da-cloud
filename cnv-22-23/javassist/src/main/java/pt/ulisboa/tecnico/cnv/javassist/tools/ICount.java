@@ -1,11 +1,10 @@
 package pt.ulisboa.tecnico.cnv.javassist.tools;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
-import javassist.CannotCompileException;
-import javassist.CtBehavior;
+import javassist.*;
 
 public class ICount extends CodeDumper {
 
@@ -57,8 +56,13 @@ public class ICount extends CodeDumper {
 
     @Override
     protected void transform(CtBehavior behavior) throws Exception {
+        // int generation = ecosystem.runSimulation(n_generations);
+        // String response = insect_wars.war(max, army1, army2);
+
         super.transform(behavior);
         behavior.insertAfter(String.format("%s.incBehavior(\"%s\");", ICount.class.getName(), behavior.getLongName()));
+        //behavior.insertAfter(String.format("%s.startStatistics(\"%s\", $$);", ICount.class.getName(), behavior.getLongName()));
+
 
         /*if (behavior.getName().equals("main")) {
             behavior.insertAfter(String.format("%s.printStatistics();", ICount.class.getName()));
@@ -69,11 +73,5 @@ public class ICount extends CodeDumper {
             behavior.insertBefore(String.format("%s.executeInsectWar($1, $2, $3);", ICount.class.getName()));
             behavior.insertAfter(String.format("%s.printAntStatistics();", ICount.class.getName()));
         }
-    }
-
-    @Override
-    protected void transform(BasicBlock block) throws CannotCompileException {
-        super.transform(block);
-        block.behavior.insertAt(block.line, String.format("%s.incBasicBlock(%s, %s);", ICount.class.getName(), block.getPosition(), block.getLength()));
     }
 }
