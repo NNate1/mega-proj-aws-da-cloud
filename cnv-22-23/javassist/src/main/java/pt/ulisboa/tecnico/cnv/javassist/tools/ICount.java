@@ -39,11 +39,10 @@ public class ICount extends CodeDumper {
         Statistic st = statisticsMap.get(tid);
 
         if (st != null) {
-            st.incBb(position, length);
+            st.incBasicBlock(position, length);
             /*nblocks++;
             ninsts += length;*/
         }
-            //st.incBb(position, length);
 
         //statisticsMap.computeIfPresent(Thread.currentThread().getId(), (banana, statistic) -> statistic.incBasicBlock(position, length));
     }
@@ -53,18 +52,23 @@ public class ICount extends CodeDumper {
         long tid = Thread.currentThread().getId();
         Statistic st = statisticsMap.get(tid);
         if (st != null) {
-            st.incB(name);
+            st.incBehaviour(name);
             //nmethods++;
         }
             //st.incB(name);
         //statisticsMap.computeIfPresent(tid, (banana, statistic) -> statistic.incBehavior(name));
     }
 
-    public static void setupInsectWar(int max, int sz1, int sz2) {
-        Statistic st = new Statistic();
+    public static void setupSimulation(String method, Object[] args) {
+        Statistic st = new Statistic(method, args);
         long tid = Thread.currentThread().getId();
         statisticsMap.put(tid, st);
     }
+    /*public static void setupInsectWar(int max, int sz1, int sz2) {
+        Statistic st = new Statistic();
+        long tid = Thread.currentThread().getId();
+        statisticsMap.put(tid, st);
+    }*/
 
     public static void printAntStatistics() {
         System.out.println(statisticsMap.get(Thread.currentThread().getId()));
@@ -82,7 +86,7 @@ public class ICount extends CodeDumper {
         // int generation = ecosystem.runSimulation(n_generations);
         // String response = insect_wars.war(max, army1, army2);
 
-        if (behavior.getName().equals("incB") || behavior.getName().equals("incBb"))
+        if (behavior.getName().equals("incBehaviour") || behavior.getName().equals("incBasicBlock"))
             return;
 
         super.transform(behavior);
@@ -98,7 +102,11 @@ public class ICount extends CodeDumper {
 
         if (behavior.getName().equals("war")) {
             System.out.println(String.format("LONG NAME OF WAR: %s", behavior.getLongName()));
-            behavior.insertBefore(String.format("%s.setupInsectWar($1, $2, $3);", ICount.class.getName()));
+
+            behavior.insertBefore("System.out.println(\"\n\nALO???\n\n\");");
+            behavior.insertBefore(String.format("%s.setupSimulation(\"%s\", $args);", ICount.class.getName(), behavior.getName()));
+            behavior.insertBefore("System.out.println(\"\n\nXAU???\n\n\");");
+            //behavior.insertBefore(String.format("%s.setupInsectWar($1, $2, $3);", ICount.class.getName()));
             behavior.insertAfter(String.format("%s.printAntStatistics();", ICount.class.getName()));
         }
     }
@@ -106,7 +114,6 @@ public class ICount extends CodeDumper {
     @Override
     protected void transform(BasicBlock block) throws CannotCompileException {
         super.transform(block);
-        //if (!block.getName().equals("incBb"))
         block.behavior.insertAt(block.line, String.format("%s.incBasicBlock(%s, %s);", ICount.class.getName(), block.getPosition(), block.getLength()));
     }
 }
