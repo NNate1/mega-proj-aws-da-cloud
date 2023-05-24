@@ -103,9 +103,7 @@ public class ICount extends CodeDumper {
         if (behavior.getName().equals("war")) {
             System.out.println(String.format("LONG NAME OF WAR: %s", behavior.getLongName()));
 
-            behavior.insertBefore("System.out.println(\"\n\nALO???\n\n\");");
             behavior.insertBefore(String.format("%s.setupSimulation(\"%s\", $args);", ICount.class.getName(), behavior.getName()));
-            behavior.insertBefore("System.out.println(\"\n\nXAU???\n\n\");");
             //behavior.insertBefore(String.format("%s.setupInsectWar($1, $2, $3);", ICount.class.getName()));
             behavior.insertAfter(String.format("%s.printAntStatistics();", ICount.class.getName()));
         }

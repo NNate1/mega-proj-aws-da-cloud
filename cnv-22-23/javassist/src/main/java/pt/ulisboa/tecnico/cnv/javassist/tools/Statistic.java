@@ -1,5 +1,7 @@
 package pt.ulisboa.tecnico.cnv.javassist.tools;
 
+import java.util.Arrays;
+
 public class Statistic {
 
     private long nBlocks, nMethods, nIntr;
@@ -26,7 +28,7 @@ public class Statistic {
 
     @Override
     public String toString(){
-        return String.format("[%s] Method: %s args: %s\n", ICount.class.getSimpleName(), args.toString()) +
+        return String.format("[%s] Method: %s args: %s\n", ICount.class.getSimpleName(), method, Arrays.toString(args)) +
                 String.format("[%s] Number of executed methods: %s\n", ICount.class.getSimpleName(), nMethods) +
                 String.format("[%s] Number of executed basic blocks: %s\n", ICount.class.getSimpleName(), nBlocks) +
                 String.format("[%s] Number of executed instructions: %s", ICount.class.getSimpleName(), nIntr);
