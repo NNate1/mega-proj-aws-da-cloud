@@ -17,6 +17,8 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import pt.ulisboa.tecnico.cnv.javassist.tools.ICount;
+import pt.ulisboa.tecnico.cnv.javassist.tools.Statistic;
 
 public abstract class BaseCompressingHandler implements HttpHandler, RequestHandler<Map<String, String>, String> {
 
@@ -56,7 +58,13 @@ public abstract class BaseCompressingHandler implements HttpHandler, RequestHand
             OutputStream os = t.getResponseBody();
             os.write(output.getBytes());
             os.close();
+
+            Statistic st = ICount.getStatistic(Thread.currentThread().getId());
+
+            System.out.println("Image Compression: {size: " + resultSplits[1].length() + " target: " + targetFormat + " compression: " + compressionFactor + " -> " + st);
         }
+
+
     }
 
     @Override

@@ -18,3 +18,11 @@ public class WebServer {
         server.start();
     }
 }
+
+/*
+Script para criar imagem
+Por Threads
+Load Balancer e AutoScaling Group da aws
+
+
+ */

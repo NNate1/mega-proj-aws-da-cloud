@@ -1,9 +1,11 @@
 package pt.ulisboa.tecnico.cnv.javassist.tools;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sun.net.httpserver.HttpExchange;
 import javassist.*;
 
 public class ICount extends CodeDumper {
@@ -30,64 +32,33 @@ public class ICount extends CodeDumper {
     }
 
     public static void incBasicBlock(int position, int length) {
-        //statisticsMap.get(Thread.currentThread().getId()).incBasicBlock(position, length);
-
-        //nao devia fazer diferença isso a linha de cima funciona
-        //Statistic st = statisticsMap.get(Thread.currentThread().getId());
-
         long tid = Thread.currentThread().getId();
-        Statistic st = statisticsMap.get(tid);
-
-        if (st != null) {
-            st.incBasicBlock(position, length);
-            /*nblocks++;
-            ninsts += length;*/
-        }
-
-        //statisticsMap.computeIfPresent(Thread.currentThread().getId(), (banana, statistic) -> statistic.incBasicBlock(position, length));
+        statisticsMap.computeIfPresent(tid, (banana, statistic) -> statistic.incBasicBlock(position, length));
     }
 
     public static void incBehavior(String name) {
-
         long tid = Thread.currentThread().getId();
-        Statistic st = statisticsMap.get(tid);
-        if (st != null) {
-            st.incBehaviour(name);
-            //nmethods++;
-        }
-            //st.incB(name);
-        //statisticsMap.computeIfPresent(tid, (banana, statistic) -> statistic.incBehavior(name));
+        statisticsMap.computeIfPresent(tid, (banana, statistic) -> statistic.incBehaviour(name));
     }
 
-    public static void setupSimulation(String method, Object[] args) {
-        Statistic st = new Statistic(method, args);
-        long tid = Thread.currentThread().getId();
-        statisticsMap.put(tid, st);
-    }
-    /*public static void setupInsectWar(int max, int sz1, int sz2) {
+    public static void setupStatistics() {
         Statistic st = new Statistic();
         long tid = Thread.currentThread().getId();
         statisticsMap.put(tid, st);
-    }*/
-
-    public static void printAntStatistics() {
-        System.out.println(statisticsMap.get(Thread.currentThread().getId()));
     }
 
-    public static void printStatistics() {
-       System.out.println(String.format("[%s] Number of executed methods: %s", ICount.class.getSimpleName(), nmethods));
-        System.out.println(String.format("[%s] Number of executed basic blocks: %s", ICount.class.getSimpleName(), nblocks));
-        System.out.println(String.format("[%s] Number of executed instructions: %s", ICount.class.getSimpleName(), ninsts));
-    }
 
+    public static Statistic getStatistic(long tid) {
+        return statisticsMap.get(tid);
+    }
 
     @Override
-        protected void transform(CtBehavior behavior) throws Exception {
+    protected void transform(CtBehavior behavior) throws Exception {
+
         // int generation = ecosystem.runSimulation(n_generations);
         // String response = insect_wars.war(max, army1, army2);
 
-        if (behavior.getName().equals("incBehaviour") || behavior.getName().equals("incBasicBlock"))
-            return;
+        if (behavior.getName().equals("incBehaviour") || behavior.getName().equals("incBasicBlock")) return;
 
         super.transform(behavior);
 
@@ -100,14 +71,21 @@ public class ICount extends CodeDumper {
         }*/
 
 
-        if (behavior.getName().equals("war")) {
-            System.out.println(String.format("LONG NAME OF WAR: %s", behavior.getLongName()));
+        /*String method = behavior.getClass().getName() + "." + behavior.getName();*/
+        //System.out.println(behavior.getLongName());
+        //System.out.println(behavior.getClass().getName());
 
-            behavior.insertBefore(String.format("%s.setupSimulation(\"%s\", $args);", ICount.class.getName(), behavior.getName()));
-            //behavior.insertBefore(String.format("%s.setupInsectWar($1, $2, $3);", ICount.class.getName()));
-            behavior.insertAfter(String.format("%s.printAntStatistics();", ICount.class.getName()));
+        if (behavior.getName().contains("handle")){
+            System.out.printf("SUIIIIIIIIIIII NAME: %s%n", behavior.getLongName());
+            //behavior.insertBefore(String.format("%s.parse($1);", ICount.class.getName()));
+
+            behavior.insertBefore(String.format("%s.setupStatistics();", ICount.class.getName()));
+            //behavior.insertAfter(String.format("%s.printStatistics();", ICount.class.getName()));
+        } else {
+            System.out.printf("NOOOOOOOOOOOOOOO NAME: %s%n", behavior.getLongName());
         }
     }
+
 
     @Override
     protected void transform(BasicBlock block) throws CannotCompileException {

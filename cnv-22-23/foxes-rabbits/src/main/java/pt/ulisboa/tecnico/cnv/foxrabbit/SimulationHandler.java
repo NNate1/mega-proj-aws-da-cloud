@@ -14,6 +14,10 @@ import java.net.URI;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
+import pt.ulisboa.tecnico.cnv.javassist.tools.ICount;
+import pt.ulisboa.tecnico.cnv.javassist.tools.Statistic;
+
+
 public class SimulationHandler implements HttpHandler, RequestHandler<Map<String, String>, String> {
 
     @Override
@@ -49,11 +53,16 @@ public class SimulationHandler implements HttpHandler, RequestHandler<Map<String
 
         //System.out.println(response);
 
-        he.sendResponseHeaders(200, response.toString().length());
+        he.sendResponseHeaders(200, response.length());
         OutputStream os = he.getResponseBody();
         os.write(response.getBytes());
 
         os.close();
+
+        Statistic st = ICount.getStatistic(Thread.currentThread().getId());
+
+        System.out.println("Foxes and rabbits: " + parameters + " -> " + st);
+        //Mandar para db os arugmentos e as instruções
     }
 
     public Map<String, String> queryToMap(String query) {
