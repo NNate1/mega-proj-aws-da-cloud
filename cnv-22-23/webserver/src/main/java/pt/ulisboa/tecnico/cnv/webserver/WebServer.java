@@ -11,11 +11,11 @@ import com.sun.net.httpserver.HttpServer;
 import pt.ulisboa.tecnico.cnv.foxrabbit.SimulationHandler;
 import pt.ulisboa.tecnico.cnv.compression.CompressImageHandlerImpl;
 import pt.ulisboa.tecnico.cnv.insectwar.WarSimulationHandler;
-import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
+//import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
 
 public class WebServer {
 
-    private static final List<MethodStatistic> methodStatistics = new ArrayList<>();
+    //private static final List<MethodStatistic> methodStatistics = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
@@ -28,11 +28,11 @@ public class WebServer {
     }
 
 
-    public static void enrichMethodStatistic (final MethodStatistic methodStatistic){
+    /*public static void enrichMethodStatistic (final MethodStatistic methodStatistic){
         synchronized (methodStatistic) {
             methodStatistics.add(methodStatistic);
         }
-    }
+    }*/
 }
 
 /*

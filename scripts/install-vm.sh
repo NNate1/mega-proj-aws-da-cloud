@@ -13,8 +13,8 @@ ssh -o StrictHostKeyChecking=no -i $AWS_EC2_SSH_KEYPAR_PATH ec2-user@$(cat insta
 scp -o StrictHostKeyChecking=no -i $AWS_EC2_SSH_KEYPAR_PATH $JAR_PATH ec2-user@$(cat instance.dns):
 
 # Build web server.
-cmd="javac WebServer.java"
-ssh -o StrictHostKeyChecking=no -i $AWS_EC2_SSH_KEYPAR_PATH ec2-user@$(cat instance.dns) $cmd 
+# cmd="javac WebServer.java"
+# ssh -o StrictHostKeyChecking=no -i $AWS_EC2_SSH_KEYPAR_PATH ec2-user@$(cat instance.dns) $cmd 
 
 # Setup web server to start on instance launch.
 #cmd="echo \"java -cp /home/ec2-user WebServer\" | sudo tee -a /etc/rc.local; sudo chmod +x /etc/rc.local"

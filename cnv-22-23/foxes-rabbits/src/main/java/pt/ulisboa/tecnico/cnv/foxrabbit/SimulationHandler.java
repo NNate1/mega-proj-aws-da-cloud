@@ -17,7 +17,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import pt.ulisboa.tecnico.cnv.javassist.tools.ICount;
-import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
+//import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
 import pt.ulisboa.tecnico.cnv.javassist.tools.Statistic;
 //import pt.ulisboa.tecnico.cnv.webserver.WebServer;
 

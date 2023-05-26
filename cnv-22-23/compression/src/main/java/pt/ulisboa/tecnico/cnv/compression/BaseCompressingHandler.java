@@ -19,7 +19,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import pt.ulisboa.tecnico.cnv.javassist.tools.ICount;
-import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
+////import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
 import pt.ulisboa.tecnico.cnv.javassist.tools.Statistic;
 //import pt.ulisboa.tecnico.cnv.webserver.WebServer;
 
