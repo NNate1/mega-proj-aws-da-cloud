@@ -62,11 +62,7 @@ public class ICount extends CodeDumper {
 
 
         if (behavior.getName().matches("(process|runSimulation|war)")) {
-            System.out.printf("DEU MATCH AO NAME: %s%n", behavior.getLongName());
-
             behavior.insertBefore(String.format("%s.setupStatistics();", ICount.class.getName()));
-        } else {
-            System.out.printf("NAO DEU MATCH AO NAME: %s%n", behavior.getLongName());
         }
     }
 

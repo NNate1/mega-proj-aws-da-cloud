@@ -6,11 +6,7 @@ import java.io.OutputStream;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.*;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URI;
 
 import com.amazonaws.services.lambda.runtime.Context;
@@ -19,7 +15,8 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import pt.ulisboa.tecnico.cnv.javassist.tools.ICount;
 import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
 import pt.ulisboa.tecnico.cnv.javassist.tools.Statistic;
-//import pt.ulisboa.tecnico.cnv.webserver.WebServer;
+
+import java.io.FileOutputStream;
 
 
 public class SimulationHandler implements HttpHandler, RequestHandler<Map<String, String>, String> {
