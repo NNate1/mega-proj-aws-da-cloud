@@ -8,7 +8,7 @@ import javassist.tools.web.Webserver;
 import pt.ulisboa.tecnico.cnv.javassist.tools.ICount;
 import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
 import pt.ulisboa.tecnico.cnv.javassist.tools.Statistic;
-import pt.ulisboa.tecnico.cnv.webserver.WebServer;
+//import pt.ulisboa.tecnico.cnv.webserver.WebServer;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -52,9 +52,9 @@ public class WarSimulationHandler implements HttpHandler, RequestHandler<Map<Str
         //------
         Statistic st = ICount.getStatistic(Thread.currentThread().getId());
 
-        System.out.println("Image Compression: " + parameters + " -> " + st);
+        System.out.println("Ant War: " + parameters + " -> " + st);
 
-        WebServer.enrichMethodStatistic(new MethodStatistic(List.of("war", parameters.get("max"), parameters.get("army1"), parameters.get("army2")), st));
+        //WebServer.enrichMethodStatistic(new MethodStatistic(List.of("war", parameters.get("max"), parameters.get("army1"), parameters.get("army2")), st));
     }
 
     public Map<String, String> queryToMap(String query) {

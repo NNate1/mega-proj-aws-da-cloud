@@ -21,7 +21,7 @@ import com.sun.net.httpserver.HttpHandler;
 import pt.ulisboa.tecnico.cnv.javassist.tools.ICount;
 import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
 import pt.ulisboa.tecnico.cnv.javassist.tools.Statistic;
-import pt.ulisboa.tecnico.cnv.webserver.WebServer;
+//import pt.ulisboa.tecnico.cnv.webserver.WebServer;
 
 
 public abstract class BaseCompressingHandler implements HttpHandler, RequestHandler<Map<String, String>, String> {
@@ -70,7 +70,7 @@ public abstract class BaseCompressingHandler implements HttpHandler, RequestHand
 
             //var statistic = ICount.getStatistic(Thread.currentThread().getId());
 
-            WebServer.enrichMethodStatistic(new MethodStatistic(List.of("process", String.valueOf(resultSplits[1].length()), targetFormat, compressionFactor), st));
+            ////WebServer.enrichMethodStatistic(new MethodStatistic(List.of("process", String.valueOf(resultSplits[1].length()), targetFormat, compressionFactor), st));
         }
     }
 

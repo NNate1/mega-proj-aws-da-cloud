@@ -19,7 +19,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import pt.ulisboa.tecnico.cnv.javassist.tools.ICount;
 import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
 import pt.ulisboa.tecnico.cnv.javassist.tools.Statistic;
-import pt.ulisboa.tecnico.cnv.webserver.WebServer;
+//import pt.ulisboa.tecnico.cnv.webserver.WebServer;
 
 
 public class SimulationHandler implements HttpHandler, RequestHandler<Map<String, String>, String> {
@@ -67,7 +67,7 @@ public class SimulationHandler implements HttpHandler, RequestHandler<Map<String
 
         System.out.println("Foxes and rabbits: " + parameters + " -> " + st);
 
-        WebServer.enrichMethodStatistic(new MethodStatistic(List.of("runSimulation", parameters.get("generations"), parameters.get("world"), parameters.get("scenario")), st));
+        //WebServer.enrichMethodStatistic(new MethodStatistic(List.of("runSimulation", parameters.get("generations"), parameters.get("world"), parameters.get("scenario")), st));
     }
 
     public Map<String, String> queryToMap(String query) {
