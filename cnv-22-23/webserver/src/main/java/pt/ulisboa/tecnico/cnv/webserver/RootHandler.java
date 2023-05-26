@@ -24,7 +24,7 @@ public class RootHandler implements HttpHandler {
         String query = requestedUri.getRawQuery();
         System.out.println(query);
 
-        String response = "IM ALIVE";
+        String response = "I'M ALIVE";
         he.sendResponseHeaders(200, response.length());
         OutputStream os = he.getResponseBody();
         os.write(response.getBytes());

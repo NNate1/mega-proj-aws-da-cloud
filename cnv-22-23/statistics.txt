@@ -6,3 +6,83 @@ Args: [runSimulation, 3, 1, 1]:
 [ICount] Number of executed methods: 1516
 [ICount] Number of executed basic blocks: 2764
 [ICount] Number of executed instructions: 32875
+Args: [war, 1, 1, 1]:
+[ICount] Number of executed methods: 60013
+[ICount] Number of executed basic blocks: 130025
+[ICount] Number of executed instructions: 1665417
+Args: [war, 10000, 1, 1]:
+[ICount] Number of executed methods: 51566658
+[ICount] Number of executed basic blocks: 194844548
+[ICount] Number of executed instructions: 771203928
+Args: [war, 1, 1, 1]:
+[ICount] Number of executed methods: 60013
+[ICount] Number of executed basic blocks: 130025
+[ICount] Number of executed instructions: 1665417
+Args: [war, 0, 1, 1]:
+[ICount] Number of executed methods: 60013
+[ICount] Number of executed basic blocks: 130025
+[ICount] Number of executed instructions: 1665417
+Args: [war, 2, 4, 1]:
+[ICount] Number of executed methods: 208019
+[ICount] Number of executed basic blocks: 539039
+[ICount] Number of executed instructions: 5080555
+Args: [war, 1, 4, 1]:
+[ICount] Number of executed methods: 150015
+[ICount] Number of executed basic blocks: 325028
+[ICount] Number of executed instructions: 4170447
+Args: [war, 1000, 10, 10]:
+[ICount] Number of executed methods: 220383980
+[ICount] Number of executed basic blocks: 835475893
+[ICount] Number of executed instructions: 3270992939
+Args: [war, 10000, 10, 10]:
+[ICount] Number of executed methods: 516238664
+[ICount] Number of executed basic blocks: 1950757062
+[ICount] Number of executed instructions: 7719003618
+Args: [war, 1, 10, 10]:
+[ICount] Number of executed methods: 600013
+[ICount] Number of executed basic blocks: 1300025
+[ICount] Number of executed instructions: 16650417
+Args: [war, 2, 10, 10]:
+[ICount] Number of executed methods: 820017
+[ICount] Number of executed basic blocks: 2135036
+[ICount] Number of executed instructions: 19900525
+Args: [war, 3, 10, 10]:
+[ICount] Number of executed methods: 1040024
+[ICount] Number of executed basic blocks: 2970060
+[ICount] Number of executed instructions: 23165941
+Args: [war, 3, 10, 10]:
+[ICount] Number of executed methods: 1040024
+[ICount] Number of executed basic blocks: 2970060
+[ICount] Number of executed instructions: 23165941
+Args: [war, 3, 10, 10]:
+[ICount] Number of executed methods: 1040024
+[ICount] Number of executed basic blocks: 2970060
+[ICount] Number of executed instructions: 23165941
+Args: [war, 3, 10, 10]:
+[ICount] Number of executed methods: 1040024
+[ICount] Number of executed basic blocks: 2970060
+[ICount] Number of executed instructions: 23165941
+Args: [war, 3, 10, 10]:
+[ICount] Number of executed methods: 1040021
+[ICount] Number of executed basic blocks: 2970047
+[ICount] Number of executed instructions: 23165633
+Args: [runSimulation, 1, 1, 1]:
+[ICount] Number of executed methods: 603
+[ICount] Number of executed basic blocks: 1181
+[ICount] Number of executed instructions: 15439
+Args: [war, 1, 1, 1]:
+[ICount] Number of executed methods: 60013
+[ICount] Number of executed basic blocks: 130025
+[ICount] Number of executed instructions: 1665417
+Args: [war, 10000, 10, 10]:
+[ICount] Number of executed methods: 516036904
+[ICount] Number of executed basic blocks: 1949950022
+[ICount] Number of executed instructions: 7716380738
+Args: [runSimulation, 1, 1, 1]:
+[ICount] Number of executed methods: 603
+[ICount] Number of executed basic blocks: 1181
+[ICount] Number of executed instructions: 15439
+Args: [war, 10000, 10, 10]:
+[ICount] Number of executed methods: 516155846
+[ICount] Number of executed basic blocks: 1950425790
+[ICount] Number of executed instructions: 7717926984
