@@ -1,7 +1,5 @@
 package pt.ulisboa.tecnico.cnv.javassist.tools;
 
-import java.util.Map;
-
 public class Statistic {
 
     private long nBlocks, nMethods, nIntr;

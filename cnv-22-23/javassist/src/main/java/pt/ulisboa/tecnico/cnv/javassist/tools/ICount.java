@@ -47,7 +47,6 @@ public class ICount extends CodeDumper {
         statisticsMap.put(tid, st);
     }
 
-
     public static Statistic getStatistic(long tid) {
         return statisticsMap.get(tid);
     }
@@ -55,37 +54,21 @@ public class ICount extends CodeDumper {
     @Override
     protected void transform(CtBehavior behavior) throws Exception {
 
-        // int generation = ecosystem.runSimulation(n_generations);
-        // String response = insect_wars.war(max, army1, army2);
-
         if (behavior.getName().equals("incBehaviour") || behavior.getName().equals("incBasicBlock")) return;
 
         super.transform(behavior);
 
         behavior.insertAfter(String.format("%s.incBehavior(\"%s\");", ICount.class.getName(), behavior.getLongName()));
 
-        //behavior.insertAfter(String.format("%s.startStatistics(\"%s\", $$);", ICount.class.getName(), behavior.getLongName()));
 
-        /*if (behavior.getName().equals("main")) {
-            behavior.insertAfter(String.format("%s.printStatistics();", ICount.class.getName()));
-        }*/
-
-
-        /*String method = behavior.getClass().getName() + "." + behavior.getName();*/
-        //System.out.println(behavior.getLongName());
-        //System.out.println(behavior.getClass().getName());
-
-        if (behavior.getName().contains("handle")){
-            System.out.printf("SUIIIIIIIIIIII NAME: %s%n", behavior.getLongName());
-            //behavior.insertBefore(String.format("%s.parse($1);", ICount.class.getName()));
+        if (behavior.getName().matches("(process|runSimulation|war)")) {
+            System.out.printf("DEU MATCH AO NAME: %s%n", behavior.getLongName());
 
             behavior.insertBefore(String.format("%s.setupStatistics();", ICount.class.getName()));
-            //behavior.insertAfter(String.format("%s.printStatistics();", ICount.class.getName()));
         } else {
-            System.out.printf("NOOOOOOOOOOOOOOO NAME: %s%n", behavior.getLongName());
+            System.out.printf("NAO DEU MATCH AO NAME: %s%n", behavior.getLongName());
         }
     }
-
 
     @Override
     protected void transform(BasicBlock block) throws CannotCompileException {

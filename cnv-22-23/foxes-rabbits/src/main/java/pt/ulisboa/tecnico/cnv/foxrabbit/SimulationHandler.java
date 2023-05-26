@@ -2,8 +2,10 @@ package pt.ulisboa.tecnico.cnv.foxrabbit;
 
 import java.io.IOException;
 import java.io.OutputStream;
+
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -15,7 +17,9 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import pt.ulisboa.tecnico.cnv.javassist.tools.ICount;
+import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
 import pt.ulisboa.tecnico.cnv.javassist.tools.Statistic;
+import pt.ulisboa.tecnico.cnv.webserver.WebServer;
 
 
 public class SimulationHandler implements HttpHandler, RequestHandler<Map<String, String>, String> {
@@ -62,19 +66,20 @@ public class SimulationHandler implements HttpHandler, RequestHandler<Map<String
         Statistic st = ICount.getStatistic(Thread.currentThread().getId());
 
         System.out.println("Foxes and rabbits: " + parameters + " -> " + st);
-        //Mandar para db os arugmentos e as instruções
+
+        WebServer.enrichMethodStatistic(new MethodStatistic(List.of("runSimulation", parameters.get("generations"), parameters.get("world"), parameters.get("scenario")), st));
     }
 
     public Map<String, String> queryToMap(String query) {
-        if(query == null) {
+        if (query == null) {
             return null;
         }
         Map<String, String> result = new HashMap<>();
-        for(String param : query.split("&")) {
+        for (String param : query.split("&")) {
             String[] entry = param.split("=");
-            if(entry.length > 1) {
+            if (entry.length > 1) {
                 result.put(entry[0], entry[1]);
-            }else{
+            } else {
                 result.put(entry[0], "");
             }
         }
@@ -96,7 +101,7 @@ public class SimulationHandler implements HttpHandler, RequestHandler<Map<String
     }
 
     @Override
-    public String handleRequest(Map<String,String> event, Context context) {
+    public String handleRequest(Map<String, String> event, Context context) {
         return handleRequest(Integer.parseInt(event.get("generations")), Integer.parseInt(event.get("world")), Integer.parseInt(event.get("scenario")));
     }
 }

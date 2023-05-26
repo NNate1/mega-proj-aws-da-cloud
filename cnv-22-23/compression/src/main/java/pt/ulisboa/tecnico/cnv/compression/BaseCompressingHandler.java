@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Base64;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -18,9 +19,13 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import pt.ulisboa.tecnico.cnv.javassist.tools.ICount;
+import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
 import pt.ulisboa.tecnico.cnv.javassist.tools.Statistic;
+import pt.ulisboa.tecnico.cnv.webserver.WebServer;
+
 
 public abstract class BaseCompressingHandler implements HttpHandler, RequestHandler<Map<String, String>, String> {
+
 
     abstract byte[] process(BufferedImage bi, String targetFormat, float compressionQuality) throws IOException;
 
@@ -62,9 +67,11 @@ public abstract class BaseCompressingHandler implements HttpHandler, RequestHand
             Statistic st = ICount.getStatistic(Thread.currentThread().getId());
 
             System.out.println("Image Compression: {size: " + resultSplits[1].length() + " target: " + targetFormat + " compression: " + compressionFactor + " -> " + st);
+
+            //var statistic = ICount.getStatistic(Thread.currentThread().getId());
+
+            WebServer.enrichMethodStatistic(new MethodStatistic(List.of("process", String.valueOf(resultSplits[1].length()), targetFormat, compressionFactor), st));
         }
-
-
     }
 
     @Override
