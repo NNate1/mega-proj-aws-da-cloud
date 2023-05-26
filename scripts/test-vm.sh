@@ -17,4 +17,6 @@ done
 
 # Sending a query!
 echo "Sending a query!"
-curl $(cat instance.dns):8000/test\?testing-after-reboot
+#curl $(cat instance.dns):8000/test?sememdo
+
+curl "$(cat instance.dns):8000/simulate?generations=2&world=1&scenario=1"
