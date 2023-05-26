@@ -19,13 +19,20 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import pt.ulisboa.tecnico.cnv.javassist.tools.ICount;
-////import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
+import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
 import pt.ulisboa.tecnico.cnv.javassist.tools.Statistic;
-//import pt.ulisboa.tecnico.cnv.webserver.WebServer;
-
 
 public abstract class BaseCompressingHandler implements HttpHandler, RequestHandler<Map<String, String>, String> {
 
+    protected final List<MethodStatistic> methodStatistics;
+
+    public BaseCompressingHandler() {
+        methodStatistics = null;
+    }
+
+    public BaseCompressingHandler(List<MethodStatistic> methodStatistics) {
+        this.methodStatistics = methodStatistics;
+    }
 
     abstract byte[] process(BufferedImage bi, String targetFormat, float compressionQuality) throws IOException;
 
@@ -68,9 +75,9 @@ public abstract class BaseCompressingHandler implements HttpHandler, RequestHand
 
             System.out.println("Image Compression: {size: " + resultSplits[1].length() + " target: " + targetFormat + " compression: " + compressionFactor + " -> " + st);
 
-            //var statistic = ICount.getStatistic(Thread.currentThread().getId());
-
-            ////WebServer.enrichMethodStatistic(new MethodStatistic(List.of("process", String.valueOf(resultSplits[1].length()), targetFormat, compressionFactor), st));
+            synchronized (methodStatistics) {
+                methodStatistics.add(new MethodStatistic(List.of("process", String.valueOf(resultSplits[1].length()), targetFormat, compressionFactor), st));
+            }
         }
     }
 
