@@ -53,10 +53,7 @@ public class WarSimulationHandler implements HttpHandler, RequestHandler<Map<Str
 
         os.close();
 
-        //------
         Statistic st = ICount.getStatistic(Thread.currentThread().getId());
-
-        System.out.println("Ant War: " + parameters + " -> " + st);
 
         synchronized (methodStatistics) {
             methodStatistics.add(new MethodStatistic(List.of("war", parameters.get("max"), parameters.get("army1"), parameters.get("army2")), st));

@@ -1,0 +1,8 @@
+Args: [war, 10000, 10, 10]:
+[ICount] Number of executed methods: 516254984
+[ICount] Number of executed basic blocks: 1950822342
+[ICount] Number of executed instructions: 7719215778
+Args: [runSimulation, 3, 1, 1]:
+[ICount] Number of executed methods: 1516
+[ICount] Number of executed basic blocks: 2764
+[ICount] Number of executed instructions: 32875

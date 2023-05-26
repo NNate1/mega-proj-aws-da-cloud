@@ -1,19 +1,5 @@
 package pt.ulisboa.tecnico.cnv.compression;
 
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.util.Base64;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import javax.imageio.ImageIO;
-
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.sun.net.httpserver.HttpExchange;
@@ -21,6 +7,14 @@ import com.sun.net.httpserver.HttpHandler;
 import pt.ulisboa.tecnico.cnv.javassist.tools.ICount;
 import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
 import pt.ulisboa.tecnico.cnv.javassist.tools.Statistic;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.util.Base64;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class BaseCompressingHandler implements HttpHandler, RequestHandler<Map<String, String>, String> {
 
@@ -72,8 +66,6 @@ public abstract class BaseCompressingHandler implements HttpHandler, RequestHand
             os.close();
 
             Statistic st = ICount.getStatistic(Thread.currentThread().getId());
-
-            System.out.println("Image Compression: {size: " + resultSplits[1].length() + " target: " + targetFormat + " compression: " + compressionFactor + " -> " + st);
 
             synchronized (methodStatistics) {
                 methodStatistics.add(new MethodStatistic(List.of("process", String.valueOf(resultSplits[1].length()), targetFormat, compressionFactor), st));

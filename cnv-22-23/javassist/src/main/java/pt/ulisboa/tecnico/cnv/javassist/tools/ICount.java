@@ -1,12 +1,11 @@
 package pt.ulisboa.tecnico.cnv.javassist.tools;
 
-import java.net.URI;
+import javassist.CannotCompileException;
+import javassist.CtBehavior;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.sun.net.httpserver.HttpExchange;
-import javassist.*;
 
 public class ICount extends CodeDumper {
 

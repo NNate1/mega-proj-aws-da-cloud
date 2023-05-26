@@ -23,7 +23,7 @@ public class SimulationHandler implements HttpHandler, RequestHandler<Map<String
 
     private final List<MethodStatistic> methodStatistics;
 
-    public SimulationHandler(List<MethodStatistic> methodStatistics) {
+    public SimulationHandler(final List<MethodStatistic> methodStatistics) {
         this.methodStatistics = methodStatistics;
     }
 
@@ -67,8 +67,6 @@ public class SimulationHandler implements HttpHandler, RequestHandler<Map<String
         os.close();
 
         Statistic st = ICount.getStatistic(Thread.currentThread().getId());
-
-        System.out.println("Foxes and rabbits: " + parameters + " -> " + st);
 
         synchronized (methodStatistics) {
             methodStatistics.add(new MethodStatistic(List.of("runSimulation", parameters.get("generations"), parameters.get("world"), parameters.get("scenario")), st));
