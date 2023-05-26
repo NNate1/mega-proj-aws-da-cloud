@@ -23,6 +23,8 @@ aws autoscaling create-launch-configuration \
 	--key-name $AWS_KEYPAIR_NAME \
 	--instance-monitoring Enabled=true
 
+echo "Created launch configuration"
+
 # Create auto scaling group.
 aws autoscaling create-auto-scaling-group \
 	--auto-scaling-group-name CNV-AutoScalingGroup \
@@ -34,3 +36,5 @@ aws autoscaling create-auto-scaling-group \
 	--min-size 1 \
 	--max-size 2 \
 	--desired-capacity 1
+
+echo "Created auto scaling group"

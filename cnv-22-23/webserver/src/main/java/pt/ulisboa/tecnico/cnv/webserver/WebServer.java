@@ -65,6 +65,7 @@ public class WebServer {
         server.createContext("/simulate", new SimulationHandler(methodStatistics));
         server.createContext("/compressimage", new CompressImageHandlerImpl(methodStatistics));
         server.createContext("/insectwar", new WarSimulationHandler(methodStatistics));
+        server.createContext("/test", new RootHandler());
         server.start();
     }
 
