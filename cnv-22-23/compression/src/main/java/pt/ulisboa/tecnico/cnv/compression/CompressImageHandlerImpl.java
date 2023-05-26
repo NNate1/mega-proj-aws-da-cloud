@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -15,8 +16,14 @@ import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
 
 import com.sun.net.httpserver.HttpHandler;
+import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
 
 public class CompressImageHandlerImpl extends BaseCompressingHandler implements HttpHandler {
+
+    public CompressImageHandlerImpl() {}
+    public CompressImageHandlerImpl(List<MethodStatistic> methodStatistics) {
+        super(methodStatistics);
+    }
 
     @Override
     byte[] process(BufferedImage bi, String targetFormat, float compressionQuality) throws IOException {

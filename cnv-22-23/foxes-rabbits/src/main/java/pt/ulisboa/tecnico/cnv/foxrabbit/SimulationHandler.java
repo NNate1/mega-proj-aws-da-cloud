@@ -24,6 +24,12 @@ import pt.ulisboa.tecnico.cnv.javassist.tools.Statistic;
 
 public class SimulationHandler implements HttpHandler, RequestHandler<Map<String, String>, String> {
 
+    private final List<MethodStatistic> methodStatistics;
+
+    public SimulationHandler(List<MethodStatistic> methodStatistics) {
+        this.methodStatistics = methodStatistics;
+    }
+
     @Override
     public void handle(HttpExchange he) throws IOException {
         // Handling CORS
@@ -67,7 +73,9 @@ public class SimulationHandler implements HttpHandler, RequestHandler<Map<String
 
         System.out.println("Foxes and rabbits: " + parameters + " -> " + st);
 
-        //WebServer.enrichMethodStatistic(new MethodStatistic(List.of("runSimulation", parameters.get("generations"), parameters.get("world"), parameters.get("scenario")), st));
+        synchronized (methodStatistics) {
+            methodStatistics.add(new MethodStatistic(List.of("runSimulation", parameters.get("generations"), parameters.get("world"), parameters.get("scenario")), st));
+        }
     }
 
     public Map<String, String> queryToMap(String query) {

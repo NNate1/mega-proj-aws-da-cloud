@@ -4,11 +4,9 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import javassist.tools.web.Webserver;
 import pt.ulisboa.tecnico.cnv.javassist.tools.ICount;
 import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
 import pt.ulisboa.tecnico.cnv.javassist.tools.Statistic;
-//import pt.ulisboa.tecnico.cnv.webserver.WebServer;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -18,6 +16,12 @@ import java.util.List;
 import java.util.Map;
 
 public class WarSimulationHandler implements HttpHandler, RequestHandler<Map<String, String>, String> {
+
+    private final List<MethodStatistic> methodStatistics;
+
+    public WarSimulationHandler(List<MethodStatistic> methodStatistics) {
+      this.methodStatistics = methodStatistics;
+    }
 
     @Override
     public void handle(HttpExchange he) throws IOException {
@@ -54,7 +58,9 @@ public class WarSimulationHandler implements HttpHandler, RequestHandler<Map<Str
 
         System.out.println("Ant War: " + parameters + " -> " + st);
 
-        //WebServer.enrichMethodStatistic(new MethodStatistic(List.of("war", parameters.get("max"), parameters.get("army1"), parameters.get("army2")), st));
+        synchronized (methodStatistics) {
+            methodStatistics.add(new MethodStatistic(List.of("war", parameters.get("max"), parameters.get("army1"), parameters.get("army2")), st));
+        }
     }
 
     public Map<String, String> queryToMap(String query) {
