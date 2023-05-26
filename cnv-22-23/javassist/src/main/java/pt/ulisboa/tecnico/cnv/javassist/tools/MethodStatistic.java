@@ -1,10 +1,12 @@
 package pt.ulisboa.tecnico.cnv.javassist.tools;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class MethodStatistic{
-    List<String> arguments;
-    Statistic statistic;
+
+    private final List<String> args;
+    private final Statistic statistic;
 
     public MethodStatistic(List<String> args, Statistic statistic){
         this.args = args;

@@ -89,9 +89,3 @@ public class WebServer {
         }
     }
 }
-
-/*
-Script para criar imagem
-Por Threads
-Load Balancer e AutoScaling Group da aws
-*/
