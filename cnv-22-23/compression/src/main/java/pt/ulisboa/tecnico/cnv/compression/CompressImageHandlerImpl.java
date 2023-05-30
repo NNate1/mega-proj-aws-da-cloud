@@ -20,7 +20,9 @@ import pt.ulisboa.tecnico.cnv.javassist.tools.MethodStatistic;
 
 public class CompressImageHandlerImpl extends BaseCompressingHandler implements HttpHandler {
 
-    public CompressImageHandlerImpl() {}
+    public CompressImageHandlerImpl() {
+    }
+
     public CompressImageHandlerImpl(List<MethodStatistic> methodStatistics) {
         super(methodStatistics);
     }
@@ -39,12 +41,12 @@ public class CompressImageHandlerImpl extends BaseCompressingHandler implements 
             ImageWriteParam param = writer.getDefaultWriteParam();
 
             String compressionType = getCompressionType(targetFormat);
-            System.out.println(String.format("Available compression types for the %s format: %s", targetFormat,
-                    Arrays.toString(param.getCompressionTypes())));
+            System.out.printf("Available compression types for the %s format: %s%n", targetFormat,
+                    Arrays.toString(param.getCompressionTypes()));
             System.out.println(param.canWriteCompressed());
             if (compressionType != null) {
-                System.out.println(String.format("Compression type chosen: %s, compression quality: %f",
-                        compressionType, compressionQuality));
+                System.out.printf("Compression type chosen: %s, compression quality: %f%n",
+                        compressionType, compressionQuality);
                 param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
                 param.setCompressionType(compressionType);
                 param.setCompressionQuality(compressionQuality);
